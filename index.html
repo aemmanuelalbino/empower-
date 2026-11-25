@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empower Generations International (EGI)</title>
+<style>
+:root{
+  --green:#1f7a4d; --green-dark:#145c39; --green-deep:#0b3d26;
+  --leaf:#7ac143; --yellow:#f5c518; --mint:#e4f2e9;
+  --bg:#edf6f0; --text:#16241c; --muted:#54685c;
+  --radius:14px; --shadow:0 6px 24px rgba(11,61,38,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--text);
+  background:var(--bg);line-height:1.65}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ---------- HEADER ---------- */
+.site-header{position:sticky;top:0;z-index:99;background:#fff;border-bottom:4px solid var(--yellow);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.6rem 1.4rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.logo-svg{width:52px;height:auto;flex:none}
+.logo-text strong{display:block;color:var(--green-deep);font-size:.95rem;line-height:1.15}
+.logo-text span{font-size:.72rem;color:var(--muted);font-style:italic}
+.main-nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.1rem}
+.main-nav li{position:relative}
+.main-nav a{display:block;text-decoration:none;font-size:.86rem;font-weight:600;
+  color:var(--green-deep);padding:.5rem .62rem;border-radius:8px;transition:.18s}
+.main-nav a:hover,.main-nav a.active{background:var(--mint);color:var(--green-dark)}
+.dropdown{display:none;position:absolute;top:100%;left:0;min-width:235px;background:#fff;
+  border:1px solid #d8e8de;border-top:3px solid var(--yellow);border-radius:10px;
+  box-shadow:var(--shadow);padding:.4rem;z-index:100}
+.has-dropdown:hover .dropdown{display:block}
+.dropdown a{font-weight:500;font-size:.84rem}
+.nav-toggle{display:none;font-size:1.6rem;background:none;border:none;
+  color:var(--green-deep);cursor:pointer}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;color:#fff;text-align:center;
+  padding:4.6rem 1.4rem 2rem;overflow:hidden;
+  background:linear-gradient(150deg,var(--green-deep) 0%,var(--green-dark) 45%,var(--green) 100%)}
+.hero > *{position:relative;z-index:2}
+.hero h1{font-size:clamp(1.9rem,4.4vw,3.05rem);line-height:1.18;margin-bottom:1rem;
+  text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.hero p{max-width:640px;margin:0 auto 1.9rem;font-size:1.06rem;opacity:.95}
+.hero-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:2rem}
+.stat strong{display:block;font-size:2.2rem;color:var(--yellow);line-height:1}
+.stat span{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;opacity:.9}
+
+/* ---------- HERO MARQUEE ---------- */
+.marquee-wrap{
+  position:relative;z-index:2;overflow:hidden;width:100%;
+  margin-top:.5rem;
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee{
+  display:flex;gap:.8rem;width:max-content;
+  animation:scroll 32s linear infinite;
+}
+.marquee:hover{animation-play-state:paused}
+.marquee img{
+  width:220px;height:140px;object-fit:cover;border-radius:12px;
+  border:3px solid rgba(255,255,255,.75);
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  flex:none;
+}
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* decorative village scene (behind the text, above the gradient) */
+.village{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;
+  max-height:50%;opacity:.22;pointer-events:none;z-index:1}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-block;padding:.72rem 1.4rem;border-radius:9px;text-decoration:none;
+  font-weight:700;font-size:.9rem;border:2px solid transparent;cursor:pointer;transition:.18s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(11,61,38,.25)}
+.btn-primary{background:var(--yellow);color:var(--green-deep)}
+.btn-outline{background:transparent;color:#fff;border-color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.18)}
+.section .btn-outline{color:var(--green);border-color:var(--green)}
+.section .btn-outline:hover{background:var(--mint)}
+
+/* ---------- SECTIONS ---------- */
+.section{max-width:1140px;margin:0 auto;padding:3.4rem 1.4rem}
+.section.alt{background:linear-gradient(180deg,#fff 0%,var(--mint) 100%);max-width:none}
+.section.alt > .inner{max-width:1140px;margin:0 auto}
+.section h2{font-size:1.72rem;color:var(--green-deep);margin-bottom:1.6rem;
+  position:relative;padding-bottom:.55rem}
+.section h2::after{content:"";position:absolute;left:0;bottom:0;width:74px;height:5px;
+  border-radius:3px;background:linear-gradient(90deg,var(--yellow),var(--leaf))}
+
+/* ---------- CARDS ---------- */
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:1.35rem 1.6rem;margin-bottom:1.15rem;border-left:5px solid var(--green)}
+.card h3{color:var(--green-dark);margin-bottom:.5rem;font-size:1.08rem}
+.card ul,.card ol{padding-left:1.25rem;margin-top:.4rem}
+.card li{margin-bottom:.3rem}
+.card a{color:var(--green);font-weight:600}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.2rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+
+/* ---------- PROGRAMMES (now with photos) ---------- */
+.programme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.3rem}
+.programme-card{background:#fff;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);transition:.22s;display:flex;flex-direction:column;
+  border-bottom:5px solid var(--leaf)}
+.programme-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(11,61,38,.22)}
+.programme-card .thumb{height:170px;overflow:hidden;background:#cfe9d8}
+.programme-card .thumb img{width:100%;height:100%;object-fit:cover;
+  transition:transform .35s}
+.programme-card:hover .thumb img{transform:scale(1.06)}
+.programme-card .body{padding:1rem 1.2rem 1.3rem;flex:1}
+.programme-card h3{color:var(--green-deep);font-size:1rem;margin-bottom:.4rem}
+.programme-card p{font-size:.87rem;color:var(--muted)}
+
+/* ---------- THEORY OF CHANGE ---------- */
+.toc{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem;margin-top:.6rem}
+.toc-stage{background:var(--mint);color:var(--green-deep);font-weight:700;font-size:.82rem;
+  padding:.62rem 1rem;border-radius:9px;border-bottom:3px solid var(--green)}
+.toc-stage.impact{background:var(--green);color:#fff;border-bottom-color:var(--yellow)}
+.toc .arrow{color:var(--green);font-weight:800;font-size:1.1rem}
+
+/* ---------- SPLIT IMAGE ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}
+.split .pic{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  min-height:320px;background:linear-gradient(135deg,var(--mint),#cfe9d8);
+  display:flex;align-items:center;justify-content:center}
+.split .pic img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- FORM ---------- */
+.contact-form label{display:block;margin-bottom:.8rem;font-size:.85rem;
+  font-weight:700;color:var(--green-dark)}
+.contact-form input,.contact-form textarea{width:100%;margin-top:.3rem;padding:.6rem .75rem;
+  border:2px solid #cfe3d7;border-radius:8px;font:inherit;background:#fbfefc}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--green)}
+
+/* ---------- FOOTER ---------- */
+.site-footer{background:linear-gradient(135deg,var(--green-deep),var(--green-dark));
+  color:#d6e9dd;padding:2.6rem 1.4rem 1rem}
+.footer-grid{max-width:1140px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.8rem;align-items:start}
+.site-footer h4{color:var(--yellow);margin-bottom:.6rem;font-size:.95rem}
+.site-footer ul{list-style:none}
+.site-footer li{margin-bottom:.3rem}
+.site-footer a{text-decoration:none;font-size:.86rem;opacity:.9}
+.site-footer a:hover{color:var(--yellow);opacity:1}
+.footer-logo{width:64px;height:auto;margin-bottom:.6rem}
+.copyright{text-align:center;margin-top:2rem;padding-top:1rem;
+  border-top:1px solid rgba(255,255,255,.18);font-size:.77rem;opacity:.75}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:920px){
+  .nav-toggle{display:block}
+  .main-nav{display:none;width:100%}
+  .main-nav.open{display:block}
+  .main-nav ul{flex-direction:column}
+  .dropdown{position:static;box-shadow:none;border:none;border-left:3px solid var(--yellow);
+    border-radius:0;padding-left:.8rem;display:none}
+  .has-dropdown:hover .dropdown{display:none}
+  .has-dropdown.open .dropdown{display:block}
+  .split{grid-template-columns:1fr}
+  .hero-stats{gap:1.6rem}
+  .marquee img{width:180px;height:120px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <a href="#home" class="logo">
+    <svg class="logo-svg" viewBox="0 0 100 118" aria-label="EGI logo">
+      <path d="M50 4 L92 21 V58 C92 86 72 105 50 113 C28 105 8 86 8 58 V21 Z"
+            fill="#cfe6f5" stroke="#e8b422" stroke-width="7" stroke-linejoin="round"/>
+      <g stroke="#e8b422" stroke-width="3" stroke-linecap="round">
+        <line x1="50" y1="14" x2="50" y2="23"/>
+        <line x1="33" y1="20" x2="37" y2="28"/>
+        <line x1="67" y1="20" x2="63" y2="28"/>
+        <line x1="22" y1="33" x2="29" y2="38"/>
+        <line x1="78" y1="33" x2="71" y2="38"/>
+      </g>
+      <circle cx="50" cy="45" r="17" fill="#f2c33c"/>
+      <circle cx="50" cy="66" r="24" fill="#7fb6dd" stroke="#1f6fb2" stroke-width="4"/>
+      <g stroke="#1f6fb2" stroke-width="2.6" fill="none">
+        <ellipse cx="50" cy="66" rx="10" ry="24"/>
+        <line x1="26" y1="66" x2="74" y2="66"/>
+        <path d="M30 54 H70"/>
+        <path d="M30 78 H70"/>
+      </g>
+    </svg>
+    <div class="logo-text">
+      <strong>Empower Generations International</strong>
+      <span>It takes a village to raise a child</span>
+    </div>
+  </a>
+  <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li class="has-dropdown"><a href="#about">About Us</a>
+        <ul class="dropdown">
+          <li><a href="#who">Who We Are</a></li>
+          <li><a href="#vision">Vision &amp; Values</a></li>
+          <li><a href="#history">Our History</a></li>
+          <li><a href="#governance">Governance</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown"><a href="#programmes">Programmes</a>
+        <ul class="dropdown">
+          <li><a href="#ecd">Early Childhood Development</a></li>
+          <li><a href="#family">Community, Family &amp; Youth</a></li>
+          <li><a href="#training">Training Systems</a></li>
+          <li><a href="#wash">WASH</a></li>
+          <li><a href="#environment">Environment &amp; Green Energy</a></li>
+          <li><a href="#crosscutting">Cross-Cutting Programmes</a></li>
+        </ul>
+      </li>
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#involved">Get Involved</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#safeguarding">Safeguarding</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+
+  <!-- village scene from your document (background) -->
+  <svg class="village" viewBox="0 0 800 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0 150 Q120 112 240 150 T480 150 T720 145 T800 152 V260 H0 Z" fill="#7ac143" opacity=".45"/>
+    <path d="M0 182 Q160 148 320 182 T640 182 T800 180 V260 H0 Z" fill="#3f8b3a" opacity=".55"/>
+    <rect y="205" width="800" height="55" fill="#2c6b33" opacity=".85"/>
+    <rect x="72" y="122" width="118" height="78" fill="#f3e4c6"/>
+    <polygon points="58,122 131,80 204,122" fill="#b5651d"/>
+    <rect x="118" y="158" width="26" height="42" fill="#8a5a2b"/>
+    <rect x="86" y="136" width="24" height="22" fill="#a8d5e5" stroke="#8a5a2b" stroke-width="2"/>
+    <rect x="244" y="142" width="10" height="58" fill="#7a4b22"/>
+    <circle cx="249" cy="132" r="26" fill="#4f9c3d"/>
+    <circle cx="228" cy="146" r="18" fill="#5cae47"/>
+    <circle cx="270" cy="146" r="18" fill="#5cae47"/>
+    <g fill="none" stroke-width="9" stroke-linecap="round">
+      <path d="M320 205 A80 80 0 0 1 480 205" stroke="#e8556d"/>
+      <path d="M334 205 A66 66 0 0 1 466 205" stroke="#f5c518"/>
+      <path d="M348 205 A52 52 0 0 1 452 205" stroke="#5cb85c"/>
+      <path d="M362 205 A38 38 0 0 1 438 205" stroke="#3d8fd1"/>
+    </g>
+    <g stroke="#6b4a2a" stroke-width="5" stroke-linecap="round">
+      <line x1="540" y1="112" x2="540" y2="205"/>
+      <line x1="648" y1="112" x2="648" y2="205"/>
+      <line x1="530" y1="112" x2="658" y2="112"/>
+    </g>
+    <g stroke="#9aa0a6" stroke-width="2.5">
+      <line x1="566" y1="114" x2="566" y2="172"/>
+      <line x1="622" y1="114" x2="622" y2="172"/>
+    </g>
+    <rect x="558" y="172" width="72" height="7" rx="3" fill="#8a5a2b"/>
+    <circle cx="578" cy="152" r="9" fill="#f2c33c"/>
+    <rect x="571" y="161" width="14" height="14" rx="4" fill="#e8556d"/>
+    <circle cx="610" cy="152" r="9" fill="#f2c33c"/>
+    <rect x="603" y="161" width="14" height="14" rx="4" fill="#3d8fd1"/>
+    <ellipse cx="722" cy="228" rx="72" ry="18" fill="#6fb8e0" opacity=".9"/>
+  </svg>
+
+  <h1>It takes a village to raise a child</h1>
+  <p>EGI helps children, young people and families in vulnerable communities build safer, stronger and more hopeful futures.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#involved">Donate</a>
+    <a class="btn btn-outline" href="#involved">Partner with Us</a>
+    <a class="btn btn-outline" href="#about">Learn More</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><strong>40+</strong><span>Years of experience</span></div>
+    <div class="stat"><strong>6</strong><span>Programme areas</span></div>
+    <div class="stat"><strong>2</strong><span>Continents</span></div>
+  </div>
+
+  <!-- ===== IMAGE MARQUEE ===== -->
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <img src="https://images.pexels.com/photos/28593055/pexels-photo-28593055.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Children learning in an African classroom">
+      <img src="https://source.unsplash.com/26vlm0cVvE4/600x400" alt="Children playing together">
+      <img src="https://source.unsplash.com/oSg7-6B10zo/600x400" alt="African children smiling">
+      <img src="https://images.pexels.com/photos/2570439/pexels-photo-2570439.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Clean water in cupped hands">
+      <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Teacher helping a student">
+      <img src="https://source.unsplash.com/bs2Ba7t69mM/600x400" alt="Environmental conservation">
+      <img src="https://images.pexels.com/photos/13799233/pexels-photo-13799233.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Child in a community garden">
+      <img src="https://images.pexels.com/photos/2675050/pexels-photo-2675050.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Classroom ready for learning">
+      <!-- duplicate set for seamless loop -->
+      <img src="https://images.pexels.com/photos/28593055/pexels-photo-28593055.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+      <img src="https://source.unsplash.com/26vlm0cVvE4/600x400" alt="">
+      <img src="https://source.unsplash.com/oSg7-6B10zo/600x400" alt="">
+      <img src="https://images.pexels.com/photos/2570439/pexels-photo-2570439.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+      <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+      <img src="https://source.unsplash.com/bs2Ba7t69mM/600x400" alt="">
+      <img src="https://images.pexels.com/photos/13799233/pexels-photo-13799233.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+      <img src="https://images.pexels.com/photos/2675050/pexels-photo-2675050.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+  <h2>About Us</h2>
+  <div class="split">
+    <div class="pic">
+      <img src="https://source.unsplash.com/5XZzwK3nsgE/800x600" alt="Community water point in Uganda">
+    </div>
+    <div>
+      <div id="who" class="card">
+        <h3>Who We Are</h3>
+        <p>EGI is a system-building and capacity-development institution, not a short-term implementing agency. Built on decades of practical experience, professional continuity and trusted partnerships across Africa and Europe, we work with families, teachers, youth, community leaders, institutions and local partners.</p>
+      </div>
+      <div id="vision" class="card">
+        <h3>Vision &amp; Core Values</h3>
+        <p><strong>Vision:</strong> A world where children and young people develop into peaceful, creative individuals reaching their full potential.</p>
+        <ul>
+          <li>Participatory democracy &middot; Integrity &middot; Collaboration</li>
+          <li>Innovation &middot; Cooperation &middot; Sustainability</li>
+        </ul>
+      </div>
+      <div id="history" class="card">
+        <h3>Our History</h3>
+        <p>40+ years in child development and education, with senior resource persons engaged since EGI's earliest beginnings — exceptional professional continuity as a core institutional asset.</p>
+      </div>
+      <div id="governance" class="card">
+        <h3>Governance</h3>
+        <p>General Assembly &middot; International Board &middot; Executive Board/Director &middot; National Organisation Boards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAMMES ================= -->
+<section id="programmes" class="section alt">
+  <div class="inner">
+    <h2>Our Programmes</h2>
+    <div class="programme-grid">
+
+      <article id="ecd" class="programme-card">
+        <div class="thumb">
+          <img src="https://images.pexels.com/photos/28593055/pexels-photo-28593055.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Early childhood classroom">
+        </div>
+        <div class="body">
+          <h3>Early Childhood Development</h3>
+          <p>Comprehensive ECD from conception to eight years, including children with special needs, parental involvement and teacher training.</p>
+        </div>
+      </article>
+
+      <article id="family" class="programme-card">
+        <div class="thumb">
+          <img src="https://images.pexels.com/photos/13799233/pexels-photo-13799233.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Family and youth">
+        </div>
+        <div class="body">
+          <h3>Community, Family &amp; Youth</h3>
+          <p>Empowering community leaders, youth and families to become agents of change.</p>
+        </div>
+      </article>
+
+      <article id="training" class="programme-card">
+        <div class="thumb">
+          <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Teacher training">
+        </div>
+        <div class="body">
+          <h3>Training Systems</h3>
+          <p>Certificate, diploma and degree-level pathways for teachers, mentors and ECD trainers, with universities and national institutions.</p>
+        </div>
+      </article>
+
+      <article id="wash" class="programme-card">
+        <div class="thumb">
+          <img src="https://images.pexels.com/photos/2570439/pexels-photo-2570439.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Clean water">
+        </div>
+        <div class="body">
+          <h3>WASH</h3>
+          <p>Water, sanitation and hygiene integrated into model programmes, communities and all training.</p>
+        </div>
+      </article>
+
+      <article id="environment" class="programme-card">
+        <div class="thumb">
+          <img src="https://source.unsplash.com/bs2Ba7t69mM/600x400" alt="Environment and green energy">
+        </div>
+        <div class="body">
+          <h3>Environment &amp; Green Energy</h3>
+          <p>Conservation, STEM learning, renewable energy and climate resilience.</p>
+        </div>
+      </article>
+
+      <article id="crosscutting" class="programme-card">
+        <div class="thumb">
+          <img src="https://source.unsplash.com/oSg7-6B10zo/600x400" alt="Community cross-cutting programmes">
+        </div>
+        <div class="body">
+          <h3>Cross-Cutting Programmes</h3>
+          <p>Peace promotion, agriculture and nutrition, sport and creativity, vocational training, counselling and life skills.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= APPROACH ================= -->
+<section id="approach" class="section">
+  <h2>Our Approach</h2>
+  <div class="card">
+    <h3>Model-Programme Logic</h3>
+    <p>EGI develops, validates and refines high-quality model programmes first, then adapts and replicates them through structured partnerships, National Organisations and a shared digital learning platform.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h3>Pillar 1 — Learning Materials</h3><p>Books, curricula and training materials embedded within national systems as a shared quality standard.</p></div>
+    <div class="card"><h3>Pillar 2 — Community Leaders</h3><p>A multiplier model where trained leaders train teachers, mentor practitioners and support curricula.</p></div>
+  </div>
+  <div class="card">
+    <h3>Theory of Change</h3>
+    <div class="toc">
+      <span class="toc-stage">Resources</span><span class="arrow">&rarr;</span>
+      <span class="toc-stage">Activities</span><span class="arrow">&rarr;</span>
+      <span class="toc-stage">Outputs</span><span class="arrow">&rarr;</span>
+      <span class="toc-stage">Outcomes</span><span class="arrow">&rarr;</span>
+      <span class="toc-stage impact">Impact</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section id="impact" class="section alt">
+  <div class="inner">
+    <h2>Our Impact</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Expected Impact</h3>
+        <ul>
+          <li>More children ready for school and life</li>
+          <li>Families gain knowledge, confidence and support</li>
+          <li>Teachers and leaders receive training and mentoring</li>
+          <li>Communities improve health, hygiene and resilience</li>
+          <li>Children protected from exclusion and violence</li>
+        </ul>
+      </div>
+      <div class="pic" style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);min-height:250px;background:linear-gradient(135deg,var(--mint),#cfe9d8)">
+        <img src="https://images.pexels.com/photos/2675050/pexels-photo-2675050.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Classroom" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GET INVOLVED ================= -->
+<section id="involved" class="section">
+  <h2>Get Involved</h2>
+  <div class="grid-3">
+    <div class="card"><h3>Partner With Us</h3><p>Donors, foundations, companies, churches, institutions and local partners — we welcome collaboration.</p></div>
+    <div class="card"><h3>Donate</h3><p>Support long-term, sustainable change rather than short-term dependency.</p><a class="btn btn-primary" href="#contact">Donate Now</a></div>
+    <div class="card"><h3>Volunteer</h3><p>Opportunities for trainers, educators, community leaders and specialists.</p></div>
+    <div class="card"><h3>National Organisations</h3><p>Become an EGI National Organisation — see the Franchise Policy (Policy 5).</p></div>
+  </div>
+</section>
+
+<!-- ================= RESOURCES ================= -->
+<section id="resources" class="section alt">
+  <div class="inner">
+    <h2>Resources &amp; Publications</h2>
+    <div class="grid-2">
+      <div class="card"><h3>Strategic Plan 2026–2041</h3><a class="btn btn-outline" href="#">Download</a></div>
+      <div class="card"><h3>Governance &amp; Policy Framework</h3><a class="btn btn-outline" href="#">Download</a></div>
+      <div class="card"><h3>Annexes</h3><ul><li>Annex 1 – Theory of Change</li><li>Annex 2 – Logical Framework</li><li>Annex 3 – MEAL Framework</li><li>Annex 4 – Policies and Safeguarding Standards</li></ul></div>
+      <div class="card"><h3>Policies (Short Versions)</h3><ul><li>Child Safeguarding &amp; Protection</li><li>Code of Conduct</li><li>Anti-Fraud and Anti-Corruption</li><li>Inclusion and Non-Discrimination</li><li>Franchise Policy</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SAFEGUARDING ================= -->
+<section id="safeguarding" class="section">
+  <h2>Safeguarding &amp; Accountability</h2>
+  <div class="card">
+    <ul>
+      <li>Commitment to child safeguarding and protection</li>
+      <li>Code of Conduct and anti-corruption commitments</li>
+      <li>Inclusion and non-discrimination principles</li>
+      <li>Confidential whistleblowing mechanism</li>
+    </ul>
+    <a class="btn btn-primary" href="#contact">Report a Concern</a>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section alt">
+  <div class="inner">
+    <h2>Contact Us</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Get in Touch</h3>
+        <p><strong>Address:</strong> Klippvägen 10, 18750 Täby, Sweden</p>
+        <p><strong>Tel/WhatsApp:</strong> +46 731 598 942</p>
+        <p><strong>Website:</strong> egint.org</p>
+      </div>
+      <form class="card contact-form" id="contactForm">
+        <h3>Send a Message</h3>
+        <label>Name<input type="text" required></label>
+        <label>Email<input type="email" required></label>
+        <label>Message<textarea rows="4" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <svg class="footer-logo" viewBox="0 0 100 118" aria-hidden="true">
+        <path d="M50 4 L92 21 V58 C92 86 72 105 50 113 C28 105 8 86 8 58 V21 Z"
+              fill="#cfe6f5" stroke="#e8b422" stroke-width="7" stroke-linejoin="round"/>
+        <circle cx="50" cy="45" r="17" fill="#f2c33c"/>
+        <circle cx="50" cy="66" r="24" fill="#7fb6dd" stroke="#1f6fb2" stroke-width="4"/>
+        <g stroke="#1f6fb2" stroke-width="2.6" fill="none">
+          <ellipse cx="50" cy="66" rx="10" ry="24"/>
+          <line x1="26" y1="66" x2="74" y2="66"/>
+        </g>
+      </svg>
+      <h4>Empower Generations International</h4>
+      <p style="font-size:.86rem;opacity:.85">It takes a village to raise a child.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul><li><a href="#about">About Us</a></li><li><a href="#programmes">Programmes</a></li><li><a href="#impact">Impact</a></li><li><a href="#involved">Get Involved</a></li></ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#safeguarding">Safeguarding</a></li></ul>
+    </div>
+  </div>
+  <p class="copyright">&copy; Empower Generations International EGI</p>
+</footer>
+
+<script>
+const navToggle = document.querySelector('.nav-toggle');
+const mainNav = document.querySelector('.main-nav');
+navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+
+document.querySelectorAll('.has-dropdown > a').forEach(link => {
+  link.addEventListener('click', e => {
+    if (window.innerWidth <= 920) { e.preventDefault(); link.parentElement.classList.toggle('open'); }
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const id = link.getAttribute('href');
+    if (id.length > 1) {
+      const target = document.querySelector(id);
+      if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); mainNav.classList.remove('open'); }
+    }
+  });
+});
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+  navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+});
+
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  alert('Thank you! Your message has been received (demo only).');
+  e.target.reset();
+});
+</script>
+</body>
+  </html>
